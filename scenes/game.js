@@ -1,7 +1,9 @@
 import k from "../kaplay.js";
 import { displayDialogue } from "../utils.js";
 
-const name = "Hiba"
+const queryString = window.location.search
+const urlParams = new URLSearchParams(queryString)
+const name = urlParams.get('name')
 
 const container = document.querySelector('.fireworks')
 const fireworks = new Fireworks.default(container)
@@ -65,7 +67,6 @@ async function game() {
       }
       continue;
     }
-    console.log(layer);
     if (layer.name === "spawnpoints") {
       for (const entity of layer.objects) {
         if (entity.name === "player") {
@@ -73,9 +74,6 @@ async function game() {
             (map.pos.x + entity.x) * 4,
             (map.pos.y + entity.y) * 4
           );
-          console.log(map.pos);
-          console.log(player.pos);
-
           k.add(player);
           continue;
         }
